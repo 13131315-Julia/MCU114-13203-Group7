@@ -1,0 +1,73 @@
+[33mcommit 37058c45f5db76913783898090ada11782066c2d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: 13130613鍾承澤 <13130613@me.mcu.edu.tw>
+Date:   Sun Oct 26 11:52:10 2025 +0800
+
+    ThreadHandlerandProgressBar
+
+[33mcommit 8bab5ac86e4a1817615817f1a9ab6ad9a224a647[m
+Author: 13130613鍾承澤 <13130613@me.mcu.edu.tw>
+Date:   Sun Oct 19 10:55:54 2025 +0800
+
+    FastFoodOrderingWizard
+
+[33mcommit 1478cc34769bf021d6d0aa2d58ed9b75794337c3[m
+Author: 13130613鍾承澤 <13130613@me.mcu.edu.tw>
+Date:   Mon Oct 13 14:57:32 2025 +0800
+
+    h1
+
+[33mcommit f61b64ec9018b0c4c3aeda7ac056a913774fae31[m
+Merge: 536b98b d723e2c
+Author: 13130613鍾承澤 <13130613@me.mcu.edu.tw>
+Date:   Mon Oct 13 14:54:38 2025 +0800
+
+    Merge branch 'master' of https://github.com/13131315-Julia/MCU114-13203-Group7
+
+[33mcommit 536b98be64fd52195863c4e0f5a9fa10a63deefa[m
+Author: 13130613鍾承澤 <13130613@me.mcu.edu.tw>
+Date:   Mon Oct 13 14:54:30 2025 +0800
+
+    h1
+
+[33mcommit a6cfeb0922473233101016d9b717bc1bcfd5ec12[m
+Author: 13130613鍾承澤 <13130613@me.mcu.edu.tw>
+Date:   Mon Oct 13 14:49:47 2025 +0800
+
+    Hello Android
+
+[33mcommit d723e2c7ef18a62925b9ac5e4600425c5b4c71cc[m
+Author: 13131315-Julia <13131315@me.mcu.edu.tw>
+Date:   Fri Oct 10 14:25:40 2025 +0800
+
+    Update Readme.txt
+
+[33mcommit 2d3f81fee8ea660f50423fea0388b19294728954[m
+Author: 13131315-Julia <13131315@me.mcu.edu.tw>
+Date:   Fri Oct 10 14:18:53 2025 +0800
+
+    New code
+
+[33mcommit 09db34def5501c74b740d24fd6f8853aef6196c2[m
+Author: 13130613鍾承澤 <13130613@me.mcu.edu.tw>
+Date:   Sun Sep 21 22:30:16 2025 +0800
+
+    App
+
+[33mcommit d093a6fb25f46939b3bb79faf99e9d40fe728ab0[m
+Merge: e563749 22af654
+Author: 13130613鍾承澤 <13130613@me.mcu.edu.tw>
+Date:   Sun Sep 21 22:16:35 2025 +0800
+
+    Merge branch 'master' of https://github.com/13131315-Julia/MCU114-13203-Group7
+
+[33mcommit e56374935328bb36c1b74787bc99d4e1abe53f14[m
+Author: 13130613鍾承澤 <13130613@me.mcu.edu.tw>
+Date:   Sun Sep 21 22:13:32 2025 +0800
+
+    APP
+
+[33mcommit 22af65471ab98c70cbe669c5345bc27278346c27[m
+Author: 13130613鍾承澤 <13130613@me.mcu.edu.tw>
+Date:   Mon Sep 15 13:15:32 2025 +0800
+
+    Add Lab2
