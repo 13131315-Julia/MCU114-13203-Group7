@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="driving_color">#FF6200EE</color>
+    <color name="walking_color">#FF03DAC5</color>
+    <color name="bicycling_color">#FF018786</color>
+</resources>
