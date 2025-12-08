@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">End of term</string>
+    <string name="title_register">新用戶註冊</string>
+    <string name="hint_enter_username">輸入帳號</string>
+    <string name="hint_enter_password">輸入密碼</string>
+    <string name="button_register_new_account">註冊新帳號</string>
+    <string name="swipe_left_to_login">向左滑動返回登入頁面</string>
+</resources>

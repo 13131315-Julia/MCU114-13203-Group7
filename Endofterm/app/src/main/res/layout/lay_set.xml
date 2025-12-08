@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".SetFrag">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="設定"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:paddingBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="帳戶與預算"
+        android:paddingVertical="8dp"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/item_user_info"
+        style="@style/SettingsItemStyle"
+        android:text="用戶資訊 >" />
+
+    <TextView
+        android:id="@+id/item_budget"
+        style="@style/SettingsItemStyle"
+        android:text="預算設定 >" />
+
+    <TextView
+        android:id="@+id/item_category"
+        style="@style/SettingsItemStyle"
+        android:text="分類管理 >" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="數據與備份"
+        android:paddingVertical="8dp"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/item_backup"
+        style="@style/SettingsItemStyle"
+        android:text="數據備份 >" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/item_logout"
+        style="@style/SettingsItemStyle"
+        android:text="登出"
+        android:textColor="@android:color/holo_red_dark"
+        android:gravity="center"
+        android:background="@drawable/rounded_background"
+        android:clickable="true"
+        android:focusable="true" />
+
+</LinearLayout>

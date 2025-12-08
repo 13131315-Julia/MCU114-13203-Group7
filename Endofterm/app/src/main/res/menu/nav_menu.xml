@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_dash"
+        android:icon="@android:drawable/ic_menu_today"
+        android:title="總覽" />
+
+    <item
+        android:id="@+id/nav_recs"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="紀錄" />
+
+    <item
+        android:id="@+id/nav_add"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="新增" />
+
+    <item
+        android:id="@+id/nav_set"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="設定" />
+</menu>
