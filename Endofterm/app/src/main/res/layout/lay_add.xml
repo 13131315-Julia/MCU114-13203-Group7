@@ -4,83 +4,132 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddAct"> <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="日期: 2024-08-06"
-        android:textSize="18sp"
-        android:layout_marginBottom="16dp"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="項目/分類">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="金額">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_amount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="備註 (可選)">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_notes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minLines="3"
-            android:gravity="top"
-            android:inputType="textMultiLine" />
-    </com.google.android.material.textfield.TextInputLayout>
+    tools:context=".AddAct"
+    tools:ignore="HardcodedText">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="32dp">
+        android:orientation="vertical"
+        android:padding="24dp">
 
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="0dp"
+        <!-- 日期選擇 -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="取消"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_marginEnd="8dp"/>
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
 
-        <Button
-            android:id="@+id/btn_save"
-            android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="日期："
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2024-08-06"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"/>
+
+            <Button
+                android:id="@+id/btn_select_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="選擇日期"
+                android:layout_marginStart="16dp"/>
+
+        </LinearLayout>
+
+        <!-- 項目/分類選擇 -->
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="儲存"
-            android:layout_marginStart="8dp"/>
+            android:text="項目/分類："
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
+            android:entries="@array/category_array"/>
+
+        <!-- 金額輸入 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="金額："
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/et_amount"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:autofillHints=""
+            android:inputType="numberDecimal"
+            android:hint="請輸入金額"
+            android:padding="16dp"
+            android:background="#FFFFFF"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- 備註 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="備註（可選）："
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/et_notes"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:autofillHints=""
+            android:inputType="textMultiLine"
+            android:gravity="top"
+            android:minLines="4"
+            android:hint="輸入備註..."
+            android:padding="16dp"
+            android:background="#FFFFFF"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- 按鈕 - 添加忽略警告 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="ButtonStyle">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="取消"
+                android:textColor="#6200EE"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="儲存"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="#6200EE"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
 </ScrollView>

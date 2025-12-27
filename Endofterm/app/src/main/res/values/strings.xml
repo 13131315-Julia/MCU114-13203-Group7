@@ -1,8 +1,46 @@
 <resources>
-    <string name="app_name">End of term</string>
-    <string name="title_register">新用戶註冊</string>
-    <string name="hint_enter_username">輸入帳號</string>
-    <string name="hint_enter_password">輸入密碼</string>
+    <string name="title_register">註冊</string>
+    <string name="hint_enter_username">請輸入帳號</string>
+    <string name="hint_enter_password">請輸入密碼</string>
     <string name="button_register_new_account">註冊新帳號</string>
-    <string name="swipe_left_to_login">向左滑動返回登入頁面</string>
+    <string name="button_back_to_login">返回登入</string>
+    <string name="app_name">End of term</string>
+    <string name="login">登入</string>
+    <string name="go_to_register">前往註冊</string>
+    <string name="date_label">日期：</string>
+    <string name="select_date">選擇日期</string>
+    <string name="category_label">項目/分類：</string>
+    <string name="amount_label">金額：</string>
+    <string name="amount_hint">請輸入金額</string>
+    <string name="notes_label">備註（可選）：</string>
+    <string name="notes_hint">輸入備註...</string>
+    <string name="cancel">取消</string>
+    <string name="save">儲存</string>
+    <string name="enter_amount">請輸入金額</string>
+    <string name="save_success">儲存成功！</string>
+    <string name="date_format">日期：%s</string>
+    <string name="category_format">項目：%s</string>
+    <string name="amount_format">金額：$%s</string>
+    <string name="notes_format">備註：%s</string>
+    <string name="none">無</string>
+    <string name="format_currency">$%.2f</string>
+    <string name="format_percentage">%d%%</string>
+
+    <string name="dashboard_total_amount_title">總消費：</string>
+    <string name="dashboard_stats_title">📈 數據統計 (%s)</string>
+    <string name="dashboard_empty_state">📭 目前沒有消費紀錄</string>
+    <string name="dashboard_summary_footer">💰 總消費：%1$s  |  📝 總筆數：%2$d筆</string>
+    <!-- 圓餅圖相關 -->
+    <string name="pie_chart_title">消費分類比例</string>
+    <string name="no_expense_data">目前沒有消費紀錄\n點擊下方 + 號新增消費</string>
+    <string name="time_range_label">顯示範圍：</string>
+    <string name="summary_title">數據摘要</string>
+
+    <!-- 時間範圍選項 -->
+    <string-array name="time_range_array">
+        <item>本週</item>
+        <item>本月</item>
+        <item>本年</item>
+        <item>全部</item>
+    </string-array>
 </resources>

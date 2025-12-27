@@ -14,37 +14,50 @@ class LoginFrag : Fragment() {
     private var _binding: LayLoginFormBinding? = null
     private val binding get() = _binding!!
 
-    // 移除登入驗證資訊，因為不再需要檢查帳號密碼
+    // 固定帳號密碼：123 (使用駝峰命名法)
+    private val fixedUsername = "123"
+    private val fixedPassword = "123"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // 載入 LayLoginFormBinding
         _binding = LayLoginFormBinding.inflate(inflater, container, false)
 
-        // 設定登入按鈕的點擊事件
         binding.btnLogin.setOnClickListener {
             performLogin()
+        }
+
+        binding.btnGoToRegister.setOnClickListener {
+            goToRegister()
         }
 
         return binding.root
     }
 
     private fun performLogin() {
-        // 獲取輸入的帳號密碼 (即使不檢查，獲取輸入仍可能是為了後續顯示)
         val username = binding.etUsername.text.toString()
-        // val password = binding.etPassword.text.toString() // 密碼可以省略不取
+        val password = binding.etPassword.text.toString()
 
-        // ⚠️ 關鍵修改：直接跳轉，不需要進行 if 判斷和驗證
-        Toast.makeText(context, "自動登入成功！", Toast.LENGTH_SHORT).show()
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(context, "請輸入帳號和密碼", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        // 跳轉到主畫面 HomeAct
-        val intent = Intent(activity, HomeAct::class.java)
-        startActivity(intent)
-        activity?.finish() // 關閉 MainAct
+        if (username == fixedUsername && password == fixedPassword) {
+            Toast.makeText(context, "登入成功！", Toast.LENGTH_SHORT).show()
 
-        // 舊的驗證邏輯已被移除
+            val intent = Intent(activity, HomeAct::class.java)
+            startActivity(intent)
+            activity?.finish()
+        } else {
+            Toast.makeText(context, "帳號或密碼錯誤", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun goToRegister() {
+        val mainAct = activity as? MainAct
+        mainAct?.binding?.loginViewPager?.currentItem = 1
     }
 
     override fun onDestroyView() {

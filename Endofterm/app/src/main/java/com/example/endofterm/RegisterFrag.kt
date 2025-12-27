@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.endofterm.databinding.LayRegisterFormBinding // 假設佈局檔案名為 lay_register_form.xml
+import com.example.endofterm.databinding.LayRegisterFormBinding
 
 class RegisterFrag : Fragment() {
 
     private var _binding: LayRegisterFormBinding? = null
-    // 假設您有一個名為 lay_register_form.xml 的佈局，其中包含 etUsername, etPassword, btnRegister
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -24,6 +23,11 @@ class RegisterFrag : Fragment() {
         // 設定註冊按鈕的點擊事件
         binding.btnRegister.setOnClickListener {
             performRegistration()
+        }
+
+        // 設定返回登入按鈕的點擊事件
+        binding.btnBackToLogin.setOnClickListener {
+            goToLogin()
         }
 
         return binding.root
@@ -43,9 +47,22 @@ class RegisterFrag : Fragment() {
         // 成功註冊的模擬反饋
         Toast.makeText(context, "註冊成功！帳號：$username", Toast.LENGTH_LONG).show()
 
-        // 註冊成功後，可以選擇讓 ViewPager2 滑動回登入頁面 (索引 0)
-        // (activity as? MainAct)?.binding?.loginViewPager?.currentItem = 0
-        // 但由於 ViewPager2 允許使用者自行滑動，通常不用程式碼強制切換
+        // 註冊成功後，返回到登入頁面
+        goToLogin()
+    }
+
+    private fun goToLogin() {
+        // 返回登入頁面（通過 ViewPager 切換到索引 0）
+        val mainAct = activity as? MainAct
+        mainAct?.binding?.loginViewPager?.currentItem = 0
+
+        // 清空註冊欄位（如果用戶返回後再註冊）
+        if (binding.etUsername.text != null) {
+            binding.etUsername.text?.clear()
+        }
+        if (binding.etPassword.text != null) {
+            binding.etPassword.text?.clear()
+        }
     }
 
     override fun onDestroyView() {

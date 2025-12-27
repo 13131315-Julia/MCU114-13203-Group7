@@ -7,13 +7,15 @@ import com.example.endofterm.databinding.LayMainBinding
 
 class MainAct : AppCompatActivity() {
 
-    private lateinit var binding: LayMainBinding
+    private lateinit var _binding: LayMainBinding
+    val binding: LayMainBinding
+        get() = _binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = LayMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        _binding = LayMainBinding.inflate(layoutInflater)
+        setContentView(_binding.root)
 
         setupLoginViewPager()
     }
@@ -28,5 +30,8 @@ class MainAct : AppCompatActivity() {
         // 使用 PageAdap 來綁定 ViewPager2
         val adapter = PageAdap(fragmentList, this)
         binding.loginViewPager.adapter = adapter
+
+        // 禁用 ViewPager 滑動功能（移除滑動）
+        binding.loginViewPager.isUserInputEnabled = false
     }
 }
