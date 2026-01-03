@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashFrag">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,9 +15,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
+            app:cardElevation="4dp"
+            android:layout_marginBottom="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,17 +30,26 @@
                     android:layout_height="wrap_content"
                     android:text="💰 總消費金額"
                     android:textSize="16sp"
-                    android:textColor="#666666"
-                    android:layout_marginBottom="8dp"/>
+                    android:textColor="?android:attr/textColorSecondary" />
 
                 <TextView
-                    android:id="@+id/tvTotalAmount"
+                    android:id="@+id/tv_total_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$0.00"
                     android:textSize="32sp"
                     android:textStyle="bold"
-                    android:textColor="#6200EE"/>
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_expense_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0筆消費"
+                    android:textSize="14sp"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginTop="4dp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -60,96 +67,72 @@
                 android:layout_height="wrap_content"
                 android:text="顯示範圍："
                 android:textSize="16sp"
-                android:layout_marginEnd="8dp"/>
+                android:textStyle="bold"
+                android:layout_marginEnd="12dp" />
 
             <Spinner
-                android:id="@+id/spinnerTimeRange"
+                android:id="@+id/spinner_time_range"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
         </LinearLayout>
 
-        <!-- 圓餅圖模擬區域 -->
+        <!-- 圓餅圖卡片 -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
+            app:cardElevation="4dp"
+            android:layout_marginBottom="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="📈 消費分類比例"
+                    android:text="📊 消費分類比例"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="16dp"/>
+                    android:layout_marginBottom="16dp" />
 
-                <!-- 圓餅圖模擬容器 -->
+                <!-- 自定義圓餅圖 -->
+                <com.example.endofterm.PieChartView
+                    android:id="@+id/pie_chart_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- 圖例容器 -->
                 <LinearLayout
-                    android:id="@+id/pieChartContainer"
+                    android:id="@+id/legend_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <!-- ProgressBar 將在這裡動態添加 -->
-
-                </LinearLayout>
-
-                <!-- 分類圖例 -->
-                <LinearLayout
-                    android:id="@+id/legendContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:padding="8dp">
-
-                    <!-- 圖例將在這裡動態添加 -->
-
-                </LinearLayout>
+                    android:padding="8dp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- 數據摘要 -->
+        <!-- 數據統計卡片 -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
+            app:cardElevation="4dp"
+            android:layout_marginBottom="16dp">
 
             <LinearLayout
+                android:id="@+id/statistics_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="16dp" />
 
-                <TextView
-                    android:id="@+id/tvSummaryTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="數據摘要"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#333333"
-                    android:lineSpacingExtra="4dp"/>
-                <LinearLayout
-                    android:id="@+id/statisticsWrapper"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>

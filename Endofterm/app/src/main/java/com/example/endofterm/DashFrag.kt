@@ -1,7 +1,5 @@
 package com.example.endofterm
 
-import android.graphics.BlendMode
-import android.graphics.BlendModeColorFilter
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
@@ -24,13 +22,12 @@ class DashFrag : Fragment() {
 
     private val chartColors = listOf(
         "#FF6B6B", "#4ECDC4", "#FFD166", "#06D6A0", "#118AB2",
-        "#EF476F", "#7209B7", "#F15BB5", "#00BBF9", "#FF9E00"
+        "#073B4C", "#7209B7", "#F72585", "#3A86FF", "#6A994E"
     )
 
-    // 確保這裡的字串與您存入資料庫/ExpenseData 的類別完全一致
     private val fixedCategories = listOf(
-        "餐飲", "購物", "交通", "娛樂", "醫療",
-        "水電費", "房租", "教育", "旅遊", "其他"
+        "餐飲", "交通", "娛樂", "購物", "房租",
+        "水電費", "電話費", "醫療", "教育", "其他"
     )
 
     override fun onCreateView(
@@ -44,6 +41,12 @@ class DashFrag : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupTimeRangeSpinner()
+
+        // 設置圓餅圖點擊監聽器
+        binding.pieChartView.onSliceClickListener = { index, item ->
+            Toast.makeText(requireContext(), "${item.label}: $${String.format("%.2f", item.value)}", Toast.LENGTH_SHORT).show()
+        }
+
         updateDashboard()
     }
 
@@ -66,7 +69,8 @@ class DashFrag : Fragment() {
         val filteredExpenses = getFilteredExpenses()
         val totalAmount = filteredExpenses.sumOf { it.amount }
 
-        binding.tvTotalAmount.text = getString(R.string.format_currency, totalAmount)
+        binding.tvTotalAmount.text = String.format("$%.2f", totalAmount)
+        binding.tvExpenseCount.text = "${filteredExpenses.size}筆消費"
 
         updatePieChart(filteredExpenses)
         updateDataStatistics(filteredExpenses)
@@ -97,84 +101,81 @@ class DashFrag : Fragment() {
     }
 
     private fun updatePieChart(expenses: List<Expense>) {
+        // 按照分類聚合消費金額
         val categoryMap = expenses.groupBy { it.category }
-            .mapValues { it.value.sumOf { exp -> exp.amount } }
+            .mapValues { it.value.sumOf { exp -> exp.amount }.toFloat() }
 
-        binding.pieChartContainer.removeAllViews()
         binding.legendContainer.removeAllViews()
 
         if (categoryMap.isEmpty()) {
-            val tvEmpty = TextView(requireContext()).apply {
-                text = getString(R.string.dashboard_empty_state)
-                gravity = Gravity.CENTER
-                setPadding(0, 40, 0, 40)
-            }
-            binding.pieChartContainer.addView(tvEmpty)
+            binding.pieChartView.clearData()
             return
         }
 
-        val totalAmount = categoryMap.values.sum()
-        val sortedCategories = categoryMap.toList().sortedByDescending { it.second }
-
-        sortedCategories.forEachIndexed { index, (category, amount) ->
-            val percentage = if (totalAmount > 0) ((amount / totalAmount) * 100).toInt() else 0
-
-            val itemContainer = LinearLayout(requireContext()).apply {
-                orientation = LinearLayout.VERTICAL
-                setPadding(0, 0, 0, 20)
-            }
-
-            val labelLayout = LinearLayout(requireContext()).apply {
-                orientation = LinearLayout.HORIZONTAL
-            }
-
-            labelLayout.addView(TextView(requireContext()).apply {
-                text = category
-                layoutParams = LinearLayout.LayoutParams(0, -2, 1f)
-                setTextColor("#333333".toColorInt())
-            })
-
-            labelLayout.addView(TextView(requireContext()).apply {
-                text = getString(R.string.format_percentage, percentage)
-                setPadding(16, 0, 16, 0)
-                setTextColor(Color.GRAY)
-            })
-
-            labelLayout.addView(TextView(requireContext()).apply {
-                text = getString(R.string.format_currency, amount)
-                setTextColor("#333333".toColorInt())
-            })
-
-            val progressBar = ProgressBar(requireContext(), null, android.R.attr.progressBarStyleHorizontal).apply {
-                max = 100
-                progress = percentage
-                val color = chartColors[index % chartColors.size].toColorInt()
-                progressDrawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
-            }
-
-            itemContainer.addView(labelLayout)
-            itemContainer.addView(progressBar)
-            binding.pieChartContainer.addView(itemContainer)
-            addLegendItem(category, index)
+        // 將數據轉換為 PieChartView 需要的格式
+        val pieData = categoryMap.toList().map { (category, amount) ->
+            category to amount
         }
+
+        binding.pieChartView.setData(pieData)
+
+        // 創建圖例
+        createLegend(categoryMap)
     }
 
-    private fun addLegendItem(category: String, index: Int) {
-        val legendItem = LinearLayout(requireContext()).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER_VERTICAL
-            setPadding(12, 4, 12, 4)
+    private fun createLegend(categoryMap: Map<String, Float>) {
+        val totalAmount = categoryMap.values.sum()
+
+        categoryMap.toList().sortedByDescending { it.second }.forEachIndexed { index, (category, amount) ->
+            val percentage = if (totalAmount > 0) ((amount / totalAmount) * 100).toInt() else 0
+
+            val legendItem = LinearLayout(requireContext()).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = Gravity.CENTER_VERTICAL
+                setPadding(0, 4, 0, 4)
+            }
+
+            // 顏色方塊
+            val colorView = View(requireContext()).apply {
+                setBackgroundColor(chartColors[index % chartColors.size].toColorInt())
+                layoutParams = LinearLayout.LayoutParams(25, 25).apply {
+                    marginEnd = 12
+                }
+            }
+
+            // 分類名稱和金額
+            val textLayout = LinearLayout(requireContext()).apply {
+                orientation = LinearLayout.HORIZONTAL
+                layoutParams = LinearLayout.LayoutParams(0, -2, 1f)
+            }
+
+            textLayout.addView(TextView(requireContext()).apply {
+                text = category
+                textSize = 14f
+                setTextColor("#333333".toColorInt())
+                layoutParams = LinearLayout.LayoutParams(0, -2, 0.6f)
+            })
+
+            textLayout.addView(TextView(requireContext()).apply {
+                text = "$percentage%"
+                textSize = 14f
+                setTextColor(Color.GRAY)
+                layoutParams = LinearLayout.LayoutParams(0, -2, 0.2f)
+                gravity = Gravity.END
+            })
+
+            textLayout.addView(TextView(requireContext()).apply {
+                text = String.format("$%.2f", amount)
+                textSize = 14f
+                setTextColor("#333333".toColorInt())
+                layoutParams = LinearLayout.LayoutParams(0, -2, 0.4f)
+                gravity = Gravity.END
+            })
+
+            legendItem.addView(colorView)
+            legendItem.addView(textLayout)
+            binding.legendContainer.addView(legendItem)
         }
-        val colorView = View(requireContext()).apply {
-            setBackgroundColor(chartColors[index % chartColors.size].toColorInt())
-            layoutParams = LinearLayout.LayoutParams(25, 25).apply { marginEnd = 8 }
-        }
-        legendItem.addView(colorView)
-        legendItem.addView(TextView(requireContext()).apply {
-            text = category
-            textSize = 12f
-        })
-        binding.legendContainer.addView(legendItem)
     }
 
     private fun updateDataStatistics(expenses: List<Expense>) {
@@ -199,23 +200,24 @@ class DashFrag : Fragment() {
         }
 
         container.addView(TextView(requireContext()).apply {
-            text = getString(R.string.dashboard_stats_title, selectedRange)
+            text = String.format("📈 數據統計 (%s)", selectedRange)
             textSize = 16f
             setTypeface(null, android.graphics.Typeface.BOLD)
             setPadding(0, 0, 0, 20)
         })
+
         container.addView(tableLayout)
 
         val totalAmountSum = expenses.sumOf { it.amount }
-        val totalFormatted = getString(R.string.format_currency, totalAmountSum)
+        val totalFormatted = String.format("$%.2f", totalAmountSum)
 
         container.addView(TextView(requireContext()).apply {
-            text = getString(R.string.dashboard_summary_footer, totalFormatted, expenses.size)
+            text = String.format("💰 總消費：%s  |  📝 總筆數：%d筆", totalFormatted, expenses.size)
             gravity = Gravity.CENTER
             setPadding(0, 32, 0, 16)
+            textSize = 14f
         })
 
-        // 修正點：確保將統計內容正確放入 UI 容器中
         binding.statisticsWrapper.apply {
             removeAllViews()
             addView(container)
@@ -231,9 +233,12 @@ class DashFrag : Fragment() {
                 text = name
                 layoutParams = LinearLayout.LayoutParams(0, -2, 1f)
                 setTextColor("#444444".toColorInt())
+                textSize = 14f
             })
+
             addView(TextView(requireContext()).apply {
-                text = getString(R.string.format_currency, amount)
+                text = String.format("$%.2f", amount)
+                textSize = 14f
                 setTextColor(if (amount > 0) "#000000".toColorInt() else "#AAAAAA".toColorInt())
             })
         }
@@ -248,4 +253,4 @@ class DashFrag : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-}
+}1

@@ -30,6 +30,7 @@
     <string name="dashboard_stats_title">📈 數據統計 (%s)</string>
     <string name="dashboard_empty_state">📭 目前沒有消費紀錄</string>
     <string name="dashboard_summary_footer">💰 總消費：%1$s  |  📝 總筆數：%2$d筆</string>
+
     <!-- 圓餅圖相關 -->
     <string name="pie_chart_title">消費分類比例</string>
     <string name="no_expense_data">目前沒有消費紀錄\n點擊下方 + 號新增消費</string>
